@@ -1,0 +1,58 @@
+{% extends 'shared/_layout.html' %}
+
+{% block title %}
+    Edit Profile Page...
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% if user.id == profile.user.id %}
+    <section class="big-section">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 text-center margin-six-bottom">
+                        <h6 class="alt-font text-extra-dark-gray font-weight-500">Edit Profile Page</h6>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-xl-5 col-lg-10 col-md-10">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+{#                            <input class="large-input margin-25px-bottom border-radius-0px required" type="text" name="name" placeholder="Your name">#}
+{#                            <textarea class="large-input margin-35px-bottom border-radius-0px" name="comment" rows="5" placeholder="How can we help you?"></textarea>#}
+                            <button class="btn btn-small btn-fancy btn-round-edge btn-gradient-fast-blue-purple">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+            {% else %}
+                <section class="bg-light-gray padding-ten-lr pt-0 xl-padding-two-lr xs-no-padding-lr">
+            <div class="container-fluid">
+                <div class="col alt-font font-weight-100 text-extra-dark-gray text-center padding-50px-all  overflow-hidden">
+                        <h6 class="mb-0 animate__fadeInUp wow" style="visibility: visible; animation-name: heartBeat;">Sorry, You Are Not current user for edit profile...!</h6>
+                </div>
+                <a href="{% url 'home' %}">
+                    <div class="row justify-content-center">
+                            <button class="btn btn-gradient-fast-blue-purple rounded">Back Home</button>
+                    </div>
+                </a>
+                </div>
+        </section>
+            {% endif %}
+        {% else %}
+        <section class="bg-light-gray padding-ten-lr pt-0 xl-padding-two-lr xs-no-padding-lr">
+            <div class="container-fluid">
+                <div class="col alt-font font-weight-100 text-extra-dark-gray text-center padding-50px-all  overflow-hidden">
+                        <h6 class="mb-0 animate__fadeInUp wow" style="visibility: visible; animation-name: heartBeat;">Sorry, You Are Not Allowed Here...!</h6>
+                </div>
+                <a href="{% url 'home' %}">
+                    <div class="row justify-content-center">
+                            <button class="btn btn-gradient-fast-blue-purple rounded">Back Home</button>
+                    </div>
+                </a>
+                </div>
+        </section>
+    {% endif %}
+{% endblock %}

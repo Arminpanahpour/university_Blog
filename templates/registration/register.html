@@ -1,0 +1,55 @@
+{% extends 'shared/_layout.html' %}
+
+{% block title %}
+    Register...
+{% endblock %}
+
+{% block content %}
+    <section class="big-section">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 text-center margin-six-bottom">
+                        <h6 class="alt-font text-extra-dark-gray font-weight-500">Register</h6>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-xl-5 col-lg-10 col-md-10">
+                        <form method="POST" class="border-all border-color-medium-gray padding-4-rem-all lg-margin-35px-top md-padding-2-half-rem-all">
+                            {% csrf_token %}
+                            {{ form.username.label }} <span class="required-error text-radical-red">*</span>
+                            {{ form.username}}
+                            {{ form.first_name.label}} <span class="required-error text-radical-red">*</span>
+                            {{ form.first_name}}
+                            {{ form.last_name.label}} <span class="required-error text-radical-red">*</span>
+                            {{ form.last_name}}
+                            {{ form.email.label}} <span class="required-error text-radical-red">*</span>
+                            {{ form.email}}
+                            {{ form.password1.label }} <span class="required-error text-radical-red">*</span>
+                            {{ form.password1 }}
+                            {{ form.password2.label }} <span class="required-error text-radical-red">*</span>
+                            {{ form.password2 }}
+
+{#                            <input class="large-input margin-25px-bottom border-radius-0px required" type="text" name="name" placeholder="Your name">#}
+{#                            <textarea class="large-input margin-35px-bottom border-radius-0px" name="comment" rows="5" placeholder="How can we help you?"></textarea>#}
+                            <br>
+                            <br>
+                            <button class="btn btn-small btn-fancy btn-round-edge btn-gradient-fast-blue-purple mb-0">Register</button>
+                            <br>
+                            <br>
+                            <hr>
+                            <br>
+                            <p>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
+                            <ul>
+                                <li>Your password can’t be too similar to your other personal information.</li>
+                                <li>Your password must contain at least 8 characters.</li>
+                                <li>Your password can’t be a commonly used password.</li>
+                                <li>Your password can’t be entirely numeric.</li>
+                            </ul>
+                            <br>
+                            <p>Enter the same password as before, for verification.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}

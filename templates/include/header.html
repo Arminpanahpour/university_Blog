@@ -1,0 +1,82 @@
+<header class="header-with-topbar">
+            <div class="top-bar bg-light-gray border-bottom border-color-black-transparent d-none d-md-inline-block" style="top: 0px;">
+                <div class="container-lg nav-header-container">
+
+                </div>
+            </div>
+            <nav class="navbar navbar-expand-lg top-space navbar-light bg-white header-light fixed-top header-reverse-scroll mobile-top-space" style="top: 49px;">
+                <div class="container-lg nav-header-container">
+                    <div class="col-6 col-lg-2 me-auto ps-lg-0">
+                        <a class="navbar-brand" href="{% url 'home' %}">
+                            <img src="/static/images/logo-fast-blue-black.png" data-at2x="/static/images/logo-fast-blue-black@2x.png" class="default-logo" alt="">
+                            <img src="/static/images/logo-fast-blue-black.png" data-at2x="/static/images/logo-fast-blue-black@2x.png" class="alt-logo" alt="">
+                            <img src="/static/images/logo-fast-blue-black.png" data-at2x="/static/images/logo-fast-blue-black@2x.png" class="mobile-logo" alt="">
+                        </a>
+                    </div>
+                    <div class="col-auto col-lg-8 menu-order px-lg-0">
+                        <button class="navbar-toggler float-end collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation" aria-expanded="false">
+                            <span class="navbar-toggler-line"></span>
+                            <span class="navbar-toggler-line"></span>
+                            <span class="navbar-toggler-line"></span>
+                            <span class="navbar-toggler-line"></span>
+                        </button>
+                        <div class=" collapse navbar-collapse justify-content-center" id="navbarNav">
+                            <ul class="navbar-nav alt-font">
+                                 {% if user.is_authenticated %}
+                                    <li class="nav-item dropdown megamenu">
+                                        <a href="{% url 'add-post' %}" class="nav-link">Add Post</a>
+                                    </li>
+
+                                     <li class="nav-item dropdown megamenu">
+                                        <a href="{% url 'add-category' %}" class="nav-link">Add Category</a>
+                                    </li>
+
+
+                                    {% if cat_menu %}
+                                    <li class="nav-item dropdown simple-dropdown">
+                                    <a href="#" class="nav-link">Categories</a>
+                                    <i class="fa fa-angle-down dropdown-toggle" data-bs-toggle="dropdown" aria-hidden="true"></i>
+                                    <ul class="dropdown-menu" role="menu">
+                                        {% for item in cat_menu %}
+                                        <li class="dropdown"><a href="{% url 'categories' item %}">{{ item }}</a></li>
+                                        {% endfor %}
+                                            </ul>
+                                        </li>
+
+                                    {% endif %}
+                                    <li class="nav-item dropdown megamenu">
+                                        <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item dropdown megamenu">
+                                        <a href="{% url 'register' %}" class="nav-link">Register</a>
+                                    </li>
+
+                                    <li class="nav-item dropdown megamenu">
+                                        <a href="{% url 'login' %}" class="nav-link">Login</a>
+                                    </li>
+
+
+                                {% endif %}
+                            {% if user.is_authenticated %}
+
+                                <ul class="navbar-nav" >
+                                <li class="nav-item dropdown simple-dropdown" >
+                                    <a href="#" class="nav-link" style="color: #0c63e4;">{{ user.username }}</a>
+
+
+                                </ul>
+
+                                {% endif %}
+
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-auto col-lg-2 text-end pe-0 font-size-0">
+
+
+                    </div>
+                </div>
+            </nav>
+        </header>

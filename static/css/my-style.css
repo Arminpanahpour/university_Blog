@@ -1,0 +1,65 @@
+.button-like{
+    display: inline-flex;
+    height: 30px;
+    padding: 0;
+    background: rgba(255,46,71,0.78);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    overflow: hidden;
+    font-family: "Arial", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.button-like:hover{
+    background: rgba(255,46,71,0.98);
+}
+.button-like:active{
+    background:#ff0057;
+}
+
+.button__text,.button__icon{
+    display: inline-flex;
+    align-items: center;
+    padding: 10px;
+    color:#fff;
+    height: 100%;
+}
+
+.button__icon{
+    font-size: 1.5rem;
+    background: rgba(0,0,0,0.08);
+}
+
+.button-unlike{
+    display: inline-flex;
+    height: 30px;
+    padding: 0;
+    background:#b130ff;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    overflow: hidden;
+    font-family: "Arial", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.button-unlike:hover{
+    background:#8a19ff
+}
+.button-unlike:active{
+    background:#7417ff
+}
+
+.login{
+    color: #0b5ed7;
+}
+
+.login:hover{
+    color:#ff3d29
+}
+

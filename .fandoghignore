@@ -1,0 +1,10 @@
+.env
+venv/
+*.log
+__pycache__/
+*.pyc
+venv
+.git
+local_settings.py
+*.mo
+*.pot

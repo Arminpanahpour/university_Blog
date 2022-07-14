@@ -1,0 +1,193 @@
+{% extends 'shared/_layout.html' %}
+{% load static %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <!-- start banner section -->
+        <section class="pb-0 overflow-visible position-relative bg-light-gray padding-eleven-lr lg-padding-four-lr">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-6 order-2 z-index-1 padding-10-rem-left padding-60px-bottom lg-padding-3-rem-left md-padding-15px-left">
+                        <div class="d-flex flex-column justify-content-center h-100">
+                            <div class="alt-font text-fast-blue text-uppercase font-weight-500 margin-30px-bottom xs-margin-10px-bottom">
+                                <a href="{% url 'categories' post.category %}" class="text-fast-blue">{{ post.category }}</a>
+                            </div>
+                            <h3 class="alt-font font-weight-500 letter-spacing-minus-1px text-extra-dark-gray ">{{ post.title }}</h3>
+                            <span class="alt-font d-block margin-15px-tb">By <a href="blog-grid.html">{{ post.author.first_name }} {{ post.author.last_name }}</a> on <a href="blog-grid.html">{{ post.post_date }}</a></span>
+                        </div>
+                        {% if user.is_authenticated %}
+                            {% if user.id == post.author.id %}
+                                <a href="{% url 'edit-post' post.id %}" class="text-medium font-weight-300 text-green text-golden-hover">Edit</a>
+                                - <a href="{% url 'delete-post' post.id %}" class="text-medium font-weight-300 text-red text-dark-red-hover">Delete</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-lg-6 px-0 order-1 align-self-end md-margin-60px-bottom">
+                        <img class="overlap-image border-radius-8px md-no-margin-bottom" src="{{ post.header_image.url }}" alt="" />
+                    </div>
+                    <div class="col-12 col-lg-6 padding-9-rem-left overflow-hidden alt-font font-weight-600 text-white text-overlap-style-01 d-none d-md-block">Blog</div>
+                </div>
+            </div>
+        </section>
+        <!-- end banner section -->
+        <!-- start section -->
+        <section class="padding-70px-top sm-padding-50px-top position-relative">
+            <div class="container">
+                <div class="row justify-content-end">
+                    <div class="col-12 col-xl-5 col-lg-6 last-paragraph-no-margin padding-3-half-rem-left md-padding-15px-left">
+                        <p>{{ post.body }}</p>
+                        <br>
+                    <hr>
+                    <br>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- end section -->
+        <!-- start section -->
+        <section class="pt-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-10 d-flex flex-wrap align-items-center mx-auto margin-35px-bottom wow animate__fadeIn">
+                        <div class="col-12 col-md-9 text-center text-md-start sm-margin-10px-bottom px-0">
+                            <div class="tag-cloud">
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 text-center text-md-end px-0">
+                            <form action="{% url 'like-post' post.id %}" method="post">
+                        {% csrf_token %}
+                     {% if user.is_authenticated %}
+                        {% if liked %}
+                            <button type="submit" name="post_id" value="{{ post.id }}" class="button-unlike">
+                                <span class="button__text">Unlike</span>
+                                <span class="button__icon">
+                                    <ion-icon name="heart-dislike-outline"></ion-icon>
+                                </span>
+                            </button>
+                        {% else %}
+                            <button type="submit" name="post_id" value="{{ post.id }}" class="button-like">
+                                <span class="button__text">Like</span>
+                                <span class="button__icon">
+                                    <ion-icon name="heart-outline"></ion-icon>
+                                </span>
+                            </button>
+                        {% endif %}
+                    {% else %}
+                       <small><a class="login" href="{% url 'login' %}"><B>Login</B></a> to like</small>
+                    {% endif %}
+                        - {{ total_likes }} likes
+                    </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-10 text-center elements-social social-icon-style-09 mx-auto">
+                        <ul class="medium-icon">
+                            <li class="wow animate__fadeIn" data-wow-delay="0.2s"><a class="facebook" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i><span></span></a></li>
+                            <li class="wow animate__fadeIn" data-wow-delay="0.3s"><a class="twitter" href="http://www.twitter.com/" target="_blank"><i class="fab fa-twitter"></i><span></span></a></li>
+                            <li class="wow animate__fadeIn" data-wow-delay="0.4s"><a class="instagram" href="http://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i><span></span></a></li>
+                            <li class="wow animate__fadeIn" data-wow-delay="0.5s"><a class="linkedin" href="http://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i><span></span></a></li>
+                            <li class="wow animate__fadeIn" data-wow-delay="0.6s"><a class="behance" href="http://www.behance.com/" target="_blank"><i class="fab fa-behance"></i><span></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end section -->
+        <!-- start section -->
+        <section class="bg-light-gray">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-5 col-md-6 text-center margin-5-rem-bottom wow animate__fadeIn">
+                        <span class="alt-font font-weight-500 text-uppercase d-inline-block">You may also like</span>
+                        <h5 class="alt-font font-weight-500 text-extra-dark-gray letter-spacing-minus-1px">Related posts</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 blog-content">
+                        <ul class="blog-clean blog-wrapper grid grid-loading grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large">
+                            <li class="grid-sizer"></li>
+                            <!-- start blog item -->
+                            {% for post in post_order %}
+                            <li class="grid-item wow animate__fadeIn">
+                                <div class="blog-post text-center border-radius-6px bg-white box-shadow box-shadow-large-hover">
+                                    <div class="blog-post-image bg-gradient-fast-blue-purple">
+                                        <a href="{% url 'detail-post' post.slug %}"><img src="{{ post.header_image.url }}" alt="">
+                                            <div class="blog-rounded-icon bg-white border-color-white absolute-middle-center">
+                                                <i class="feather icon-feather-arrow-right text-extra-dark-gray icon-extra-small"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="post-details padding-30px-all xl-padding-25px-lr">
+                                        <a href="blog-grid.html" class="post-author text-medium text-uppercase">{{ post.post_date }}</a>
+                                        <a href="blog-post-layout-01.html" class="text-extra-dark-gray font-weight-500 alt-font d-block">{{ post.title }}</a>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                            <!-- end blog item -->
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- start section -->
+        <section>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 text-center margin-5-rem-bottom wow animate__fadeIn">
+                        <h6 class="alt-font text-extra-dark-gray font-weight-500">Comments...</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-9 mx-auto wow animate__fadeIn">
+                        <ul class="blog-comment">
+                            <li>
+                                {% if not post.comments.all %}
+                                    <h5>Not Comments Yet...</h5>
+                                {% else %}
+                                    {% for comment in post.comments.all %}
+                                <div class="d-block d-md-flex w-100 align-items-center align-items-md-start ">
+                                    <div class="w-75px sm-w-50px sm-margin-10px-bottom">
+                                        {% if comment.creator.profile.profile_image %}
+                                            <img src="{{ comment.creator.profile.profile_image.url }}" class="rounded-circle w-110px" alt=""/>
+                                            {% else %}
+                                            <img src="{% static 'images/profile/none.png' %}" class="rounded-circle w-110px" alt=""/>
+                                            {% endif %}
+{#                                        <img src="{{ user.profile.profile_image.url }}" class="rounded-circle w-95 sm-w-100" alt=""/>#}
+                                    </div>
+                                    <div class="w-100 padding-25px-left last-paragraph-no-margin sm-no-padding-left">
+                                        <a href="#" class="text-extra-dark-gray text-fast-blue-hover alt-font font-weight-500 text-medium">{{ comment.name }}</a>
+                                        <a href="#comments" class="btn-reply text-medium-gray text-uppercase section-link">Reply</a>
+                                        <div class="text-medium text-medium-gray margin-15px-bottom">{{ comment.date_added }}</div>
+                                        <p class="w-85">{{ comment.body }}</p>
+                                    </div>
+
+                                </div>
+                                        <br>
+                                        <hr>
+                                        <br>
+                                    {% endfor %}
+                                {% endif %}
+
+                              <a href="{% url 'add-comment' post.pk %}" class="text-dark-red text-fast-blue-hover alt-font font-weight-500 text-medium">Add Comment...</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end section -->
+
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+{% endblock %}

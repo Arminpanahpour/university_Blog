@@ -1,0 +1,57 @@
+{% extends 'shared/_layout.html' %}
+{% load static %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <!-- start banner section -->
+        <section class="pb-0 overflow-visible position-relative bg-light-gray padding-eleven-lr lg-padding-four-lr">
+            <div class="container-fluid">
+                <div class="row">
+        <!-- start section -->
+        <section class="pt-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-10 mx-auto margin-60px-bottom md-margin-30px-bottom">
+                        <div class="d-block d-md-flex w-100 box-shadow-small align-items-center border-radius-5px padding-4-rem-all">
+                            <div class="w-130px text-center margin-60px-right sm-margin-auto-lr">
+                                {% if page_user.profile_image %}
+                                <img src="{{ page_user.profile_image.url }}" class="rounded-circle w-110px" alt=""/>
+                                {% else %}
+                                <img src="{% static 'images/profile/none.png' %}" class="rounded-circle w-110px" alt=""/>
+                                {% endif %}
+                                <a href="blog-grid.html" class="text-extra-dark-gray alt-font font-weight-500 margin-20px-top d-inline-block text-medium">{{ page_user.user.first_name }} {{ page_user.user.last_name }}</a>
+                                <span class="text-medium d-block line-height-18px sm-margin-15px-bottom">Co-founder</span>
+                            </div>
+                            <div class="w-75 sm-w-100 last-paragraph-no-margin text-center text-md-start">
+                                <p>{{ page_user.bio }}</p>
+                                <a href="blog-grid.html" class="btn btn-link btn-large text-extra-dark-gray margin-20px-top">All author posts</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-10 text-center elements-social social-icon-style-09 mx-auto">
+                        <ul class="medium-icon">
+                            <li class="wow animate__fadeIn" data-wow-delay="0.2s"><a class="facebook" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i><span></span></a></li>
+                            <li class="wow animate__fadeIn" data-wow-delay="0.3s"><a class="twitter" href="http://www.twitter.com/" target="_blank"><i class="fab fa-twitter"></i><span></span></a></li>
+                            <li class="wow animate__fadeIn" data-wow-delay="0.4s"><a class="instagram" href="http://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i><span></span></a></li>
+                            <li class="wow animate__fadeIn" data-wow-delay="0.5s"><a class="linkedin" href="http://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i><span></span></a></li>
+                            <li class="wow animate__fadeIn" data-wow-delay="0.6s"><a class="behance" href="http://www.behance.com/" target="_blank"><i class="fab fa-behance"></i><span></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end section -->
+
+
+
+</div>
+            </div>
+        </section>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'shared/_layout.html' %}
+
+{% block title %}
+    Add Post...
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+      <!-- start section -->
+        <section id="comments" class="pt-0">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-9 margin-4-rem-bottom sm-margin-2-rem-bottom wow animate__fadeIn">
+                        <br>
+                        <br>
+                        <h6 class="alt-font text-extra-dark-gray font-weight-500 margin-5px-bottom">Write a comments...</h6>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-9 wow animate__fadeIn">
+                        <form  method="post">
+                            {% csrf_token %}
+                            <div class="row align-items-center">
+                                {{ form.as_p }}
+                                <div class="col-12 sm-margin-20px-bottom">
+                                    <button class="btn btn-small btn-round-edge btn-gradient-fast-blue-purple mb-0 ">Add Post</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end section -->
+      {% else %}
+    <section class="bg-light-gray padding-ten-lr pt-0 xl-padding-two-lr xs-no-padding-lr">
+            <div class="container-fluid">
+                <div class="col alt-font font-weight-100 text-extra-dark-gray text-center padding-50px-all  overflow-hidden">
+                        <h6 class="mb-0 animate__fadeInUp wow" style="visibility: visible; animation-name: heartBeat;">Sorry, you must be Logged in...!</h6>
+                </div>
+                <a href="{% url 'home' %}">
+                    <div class="row justify-content-center">
+                            <button class="btn btn-gradient-fast-blue-purple rounded">Back Home</button>
+                    </div>
+                </a>
+                </div>
+        </section>
+    {% endif %}
+    <script>
+        var name = '{{ user.id }}';
+        document.getElementById('khaloei').value = name;
+    </script>
+
+{% endblock %}

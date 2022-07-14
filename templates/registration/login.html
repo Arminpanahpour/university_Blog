@@ -1,0 +1,31 @@
+{% extends 'shared/_layout.html' %}
+
+{% block title %}
+    Login Post...
+{% endblock %}
+
+{% block content %}
+    <section class="big-section">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 text-center margin-six-bottom">
+                        <h6 class="alt-font text-extra-dark-gray font-weight-500">Login</h6>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-xl-5 col-md-6 lg-padding-30px-lr md-padding-15px-lr sm-margin-40px-bottom">
+
+                        <form action="" method="post" class="bg-light-gray padding-4-rem-all lg-margin-35px-top md-padding-2-half-rem-all">
+                            {% csrf_token %}
+                            <label class="margin-15px-bottom">Username <span class="required-error text-radical-red">*</span></label>
+                            <input class="small-input bg-white margin-20px-bottom required" type="text" name="username" placeholder="Enter your username">
+                            <label class="margin-15px-bottom">Password <span class="required-error text-radical-red">*</span></label>
+                            <input class="small-input bg-white margin-20px-bottom required" type="password" name="password" placeholder="Enter your password">
+                            <button class="btn btn-medium btn-fancy btn-dark-gray w-100">Login</button>
+                            <p class="text-end margin-20px-top mb-0"><a href="{% url 'register' %}" class="btn btn-link  btn-medium text-extra-dark-gray">Not Register? SignUp Here...</a></p>
+                        </form>
+                    </div>
+            </div>
+            </div>
+        </section>
+{% endblock %}
